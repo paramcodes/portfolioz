@@ -1,0 +1,66 @@
+---
+import { site, socials, nav } from '../config';
+
+const icons: Record<string, string> = {
+  github: 'M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.35 1.08 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z',
+  linkedin: 'M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45Z',
+  x: 'M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z',
+  dribbble: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.6 4.6a8.5 8.5 0 0 1 1.9 5.3c-.3-.06-3.37-.68-6.45-.29-.07-.15-.13-.32-.2-.48-.19-.45-.39-.9-.6-1.34 6.8-2.78 3.35-.19 5.35.81ZM12 3.5c2.23 0 4.27.83 5.81 2.2-1.63-.85-3.88-2.07-8.86-.5 1.05 1.74 2.1 3.8 2.83 5.6A16.4 16.4 0 0 1 4.6 8.16 8.53 8.53 0 0 1 12 3.5ZM3.5 12v-.25c.42.06 4.16.56 8.12-1.1.22.42.42.86.6 1.3.04.08.07.16.11.24-4.37 1.77-6.66 5.25-7.26 6.5A8.5 8.5 0 0 1 3.5 12Zm8.5 8.5c-2.02 0-3.88-.7-5.33-1.87.5-1.03 2.26-4.07 6.28-5.7l.03-.01c.9 2.33 1.28 4.28 1.38 4.83A8.52 8.52 0 0 1 12 20.5Zm4.78-1.4c-.08-.5-.38-2.1-1.16-4.1 3-.48 5.63.3 5.96.42a8.58 8.58 0 0 1-4.8 3.68Z',
+  globe: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm7.93 9h-3.02a15.7 15.7 0 0 0-1.2-5.2 8.02 8.02 0 0 1 4.22 5.2ZM12 4.06A13.9 13.9 0 0 1 14.9 11H9.1A13.9 13.9 0 0 1 12 4.06ZM4.07 13h3.02c.2 2.16.63 3.7 1.2 5.2a8.02 8.02 0 0 1-4.22-5.2Zm3.02-2H4.07a8.02 8.02 0 0 1 4.22-5.2 15.7 15.7 0 0 0-1.2 5.2Zm2.01 0h5.8a13.6 13.6 0 0 1 0 2H9.1a13.6 13.6 0 0 1 0-2Zm.61 5.2c.5.9 1.3 1.9 2.29 2.74.99-.84 1.79-1.84 2.29-2.74H9.71ZM15.91 13h3.02a8.02 8.02 0 0 1-4.22 5.2c.57-1.5 1-3.04 1.2-5.2Zm1.18-2h-3.02c-.2-2.16-.63-3.7-1.2-5.2a8.02 8.02 0 0 1 4.22 5.2Z',
+  mail: 'M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z',
+};
+---
+
+<footer class="border-t border-white/10 bg-black/40">
+  <!-- big CTA banner -->
+  <div class="mx-auto max-w-7xl px-5 pt-16 sm:px-8">
+    <a href="#contact" class="reveal group block overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-violet-600/30 via-fuchsia-500/10 to-[#d4ff4f]/15 p-8 transition hover:border-[#d4ff4f]/40 sm:p-12">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <div class="font-mono text-xs tracking-[0.25em] text-[#d4ff4f]">HAVE A ROLE OR A PROJECT?</div>
+          <div class="mt-2 font-display text-3xl font-bold tracking-tight sm:text-5xl">Let's build something real <span class="inline-block transition group-hover:translate-x-2 group-hover:-rotate-12">↗</span></div>
+        </div>
+        <div class="magnetic grid h-20 w-20 shrink-0 place-items-center rounded-full bg-[#d4ff4f] font-display text-3xl text-black transition group-hover:scale-110">→</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
+    <div>
+      <div class="flex items-center gap-2.5">
+        <span class="grid h-9 w-9 place-items-center rounded-xl bg-[#d4ff4f] font-display text-lg font-bold text-black">{site.firstName[0]}</span>
+        <span class="font-display text-lg font-semibold">{site.name}<span class="text-[#d4ff4f]">.</span></span>
+      </div>
+      <p class="mt-4 max-w-sm text-sm leading-relaxed text-zinc-500">{site.tagline}</p>
+      <div class="mt-5 flex gap-2">
+        {socials.map((s) => (
+          <a href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} class="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-zinc-400 transition hover:border-[#d4ff4f]/50 hover:text-[#d4ff4f]">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d={icons[s.icon]} /></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+    <nav aria-label="Sitemap">
+      <div class="font-mono text-xs tracking-widest text-zinc-500">SITEMAP</div>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {nav.map((n) => <li><a href={n.href} class="text-zinc-400 transition hover:text-[#d4ff4f]">{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <div>
+      <div class="font-mono text-xs tracking-widest text-zinc-500">GET IN TOUCH</div>
+      <a href={`mailto:${site.email}`} class="mt-4 block text-sm text-zinc-300 transition hover:text-[#d4ff4f] break-all">{site.email}</a>
+      <a href={`tel:${site.phone}`} class="mt-1 block text-sm text-zinc-400 transition hover:text-[#d4ff4f]">{site.phoneDisplay}</a>
+      <div class="mt-1 text-sm text-zinc-500">{site.location}</div>
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-[#d4ff4f]/30 bg-[#d4ff4f]/5 px-4 py-2 font-mono text-xs text-[#d4ff4f]">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-[#d4ff4f]"></span> {site.availability}
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 py-6 font-mono text-xs text-zinc-600 sm:flex-row sm:px-8">
+      <span>© <span id="year">2026</span> {site.name} · Built with Astro & Tailwind</span>
+      <a href="#top" class="transition hover:text-[#d4ff4f]">Back to top ↑</a>
+    </div>
+  </div>
+</footer>

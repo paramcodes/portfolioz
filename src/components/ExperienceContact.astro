@@ -1,0 +1,89 @@
+---
+import { experience, achievements, faqs, site } from '../config';
+---
+
+<section id="experience" class="scroll-mt-24 border-t border-white/10 bg-white/[0.015]">
+  <div class="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+    <div class="reveal flex items-center gap-3 font-mono text-xs tracking-[0.25em] text-[#d4ff4f]">
+      <span class="h-px w-10 bg-[#d4ff4f]/60"></span> 04 · EXPERIENCE
+    </div>
+    <h2 class="reveal mt-4 max-w-2xl font-display text-4xl font-bold tracking-tight sm:text-5xl">Open source, AI systems & CS fundamentals.</h2>
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-[1fr_380px]">
+      <ol class="relative space-y-0 border-l border-white/10 pl-0">
+        {experience.map((e, i) => (
+          <li class="reveal relative pb-10 pl-10 last:pb-0" style={`--reveal-delay:${i * 60}ms`}>
+            <span class="timeline-dot absolute -left-[7px] top-1 h-3.5 w-3.5 rounded-full bg-[#d4ff4f]"></span>
+            <div class="font-mono text-xs tracking-widest text-[#d4ff4f]">{e.period}</div>
+            <h3 class="mt-2 font-display text-xl font-semibold">{e.role} <span class="text-zinc-500">· {e.company}</span></h3>
+            <div class="mt-1 font-mono text-xs text-zinc-500">{e.location}</div>
+            <p class="mt-3 max-w-2xl leading-relaxed text-zinc-400">{e.text}</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {e.tags.map((t) => <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">{t}</span>)}
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <aside class="reveal h-fit rounded-3xl border border-white/10 bg-gradient-to-b from-violet-600/15 to-transparent p-7 lg:sticky lg:top-24">
+        <div class="font-mono text-xs tracking-widest text-zinc-500">CURRENTLY</div>
+        <h3 class="mt-2 font-display text-2xl font-bold">Open to work</h3>
+        <p class="mt-3 text-sm leading-relaxed text-zinc-400">Internships, freelance builds & full-time backend / AI engineering roles. Backend-heavy, AI-fluent.</p>
+        <a href={site.resumeUrl} target="_blank" rel="noopener" class="magnetic mt-6 block rounded-2xl bg-[#d4ff4f] px-5 py-3.5 text-center font-semibold text-black transition hover:brightness-110">↓ Download résumé</a>
+        <a href="#contact" class="mt-3 block rounded-2xl border border-white/15 px-5 py-3.5 text-center font-semibold transition hover:border-white/40">Get in touch</a>
+        <div class="mt-4 flex items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-5 py-3 font-mono text-xs text-zinc-400">
+          <span>AVG. RESPONSE</span><span class="text-[#d4ff4f]">&lt; 24H</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="achievements" class="mx-auto max-w-7xl scroll-mt-24 px-5 py-24 sm:px-8">
+  <div class="reveal flex items-center gap-3 font-mono text-xs tracking-[0.25em] text-[#d4ff4f]">
+    <span class="h-px w-10 bg-[#d4ff4f]/60"></span> 05 · PROOF OF WORK
+  </div>
+  <h2 class="reveal mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">Numbers that speak.</h2>
+  <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {achievements.map((a, i) => (
+      <div class="reveal spotlight tilt rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition hover:-translate-y-1 hover:border-[#d4ff4f]/40" style={`--reveal-delay:${i * 80}ms`}>
+        <div class="font-display text-5xl font-bold tracking-tight text-[#d4ff4f]">{a.value}</div>
+        <h3 class="mt-3 font-display text-lg font-semibold">{a.title}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-zinc-400">{a.text}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-14 grid gap-4 lg:grid-cols-2">
+    <div class="reveal rounded-3xl border border-white/10 bg-white/[0.02] p-7">
+      <h3 class="font-display text-xl font-semibold">FAQ</h3>
+      <div class="mt-4 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-white/10 bg-black/20 px-5 py-4 transition open:border-[#d4ff4f]/40">
+            <summary class="cursor-pointer list-none font-medium transition group-hover:text-[#d4ff4f]">{f.q}<span class="float-right text-[#d4ff4f]">+</span></summary>
+            <p class="mt-2 text-sm leading-relaxed text-zinc-400">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+    <div id="contact" class="reveal scroll-mt-24 rounded-3xl border border-[#d4ff4f]/20 bg-gradient-to-br from-[#d4ff4f]/10 via-transparent to-violet-600/10 p-7 sm:p-9">
+      <div class="font-mono text-xs tracking-[0.25em] text-[#d4ff4f]">06 · CONTACT</div>
+      <h3 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">Have a role or an idea?<br />Let's talk.</h3>
+      <p class="mt-3 text-zinc-400">Backend builds, AI systems, or just to say hi — I reply within 24h.</p>
+      <div class="mt-4 space-y-1.5">
+        <a href={`mailto:${site.email}`} class="block font-mono text-sm text-[#d4ff4f] underline-offset-4 hover:underline">{site.email}</a>
+        <a href={`tel:${site.phone}`} class="block font-mono text-sm text-zinc-300 underline-offset-4 hover:text-[#d4ff4f]">{site.phoneDisplay}</a>
+      </div>
+      <form id="contact-form" class="mt-6 space-y-3">
+        <div class="grid gap-3 sm:grid-cols-2">
+          <input required placeholder="Your name" class="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none transition placeholder:text-zinc-600 focus:border-[#d4ff4f]/60" />
+          <input required type="email" placeholder="Email" class="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none transition placeholder:text-zinc-600 focus:border-[#d4ff4f]/60" />
+        </div>
+        <input placeholder="Role / project type (e.g. backend intern)" class="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none transition placeholder:text-zinc-600 focus:border-[#d4ff4f]/60" />
+        <textarea required rows={4} placeholder="Tell me about the role or project…" class="w-full resize-none rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none transition placeholder:text-zinc-600 focus:border-[#d4ff4f]/60"></textarea>
+        <button class="magnetic w-full rounded-xl bg-[#d4ff4f] py-3.5 font-semibold text-black transition hover:brightness-110">Send message →</button>
+        <p id="form-ok" class="hidden rounded-xl border border-[#d4ff4f]/40 bg-[#d4ff4f]/10 px-4 py-3 text-sm text-[#d4ff4f]">✓ Message ready — demo form. Prefer email? <a class="underline" href={`mailto:${site.email}`}>Write me directly</a>.</p>
+      </form>
+    </div>
+  </div>
+</section>

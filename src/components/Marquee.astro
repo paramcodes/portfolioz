@@ -1,0 +1,14 @@
+---
+import { marquee } from '../config';
+---
+<div class="relative border-y border-white/10 bg-white/[0.02] py-5">
+  <div class="marquee-mask overflow-hidden">
+    <div class="animate-marquee flex w-max items-center gap-10 pr-10">
+      {[...marquee, ...marquee].map((m) => (
+        <span class="flex items-center gap-10 whitespace-nowrap font-display text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
+          {m} <span class="text-[#d4ff4f]">✦</span>
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

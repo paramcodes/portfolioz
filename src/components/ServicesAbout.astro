@@ -1,0 +1,78 @@
+---
+import { services, skills } from '../config';
+---
+
+<section id="about" class="relative scroll-mt-24 border-t border-white/10 bg-white/[0.015]">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-24 sm:px-8 lg:grid-cols-[1.1fr_.9fr]">
+    <div>
+      <div class="reveal flex items-center gap-3 font-mono text-xs tracking-[0.25em] text-[#d4ff4f]">
+        <span class="h-px w-10 bg-[#d4ff4f]/60"></span> 01 · ABOUT
+      </div>
+      <h2 class="reveal mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">Backend-first engineer, <span class="bg-gradient-to-r from-violet-400 to-[#d4ff4f] bg-clip-text text-transparent">agent-minded builder.</span></h2>
+      <div class="reveal mt-6 space-y-4 leading-relaxed text-zinc-400">
+        <p>I'm Paramveer — a full-stack developer and agentic AI engineer with a strong backend focus. I build scalable web apps, production RAG pipelines and LLM agents with the unglamorous parts done right: provenance, evals, observability and infra as code.</p>
+        <p>As a GSSoC '24 project admin I led 50+ contributors and kept deploys green at zero downtime. These days I'm building AI systems in public — open source, documented trade-offs and all.</p>
+      </div>
+      <div class="reveal mt-8 flex flex-wrap gap-3">
+        <a href="#contact" class="magnetic rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#d4ff4f]">Work with me</a>
+        <a href="#experience" class="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold transition hover:border-white/40">See experience</a>
+      </div>
+      <div class="reveal mt-8 grid grid-cols-3 gap-4">
+        {[
+          ['Durgapur, IN', 'Based'],
+          ['EN · HI', 'Languages'],
+          ['24h', 'Reply time'],
+        ].map(([v, l]) => (
+          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-center">
+            <div class="font-display font-bold">{v}</div>
+            <div class="mt-1 font-mono text-[11px] tracking-widest text-zinc-500">{l.toUpperCase()}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="reveal relative">
+      <div class="tilt spotlight overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-violet-600/30 via-[#0d0d14] to-[#0d0d14] p-8">
+        <div class="flex items-center justify-between font-mono text-xs tracking-widest text-zinc-500">
+          <span>SKILLS</span><span class="text-[#d4ff4f]">● LIVE</span>
+        </div>
+        <div class="mt-6 space-y-5">
+          {skills.map((sk) => (
+            <div>
+              <div class="mb-1.5 flex justify-between text-sm"><span class="text-zinc-200">{sk.name}</span><span class="font-mono text-xs text-zinc-500">{sk.level}%</span></div>
+              <div class="h-1.5 overflow-hidden rounded-full bg-white/10">
+                <div class="h-full rounded-full bg-gradient-to-r from-violet-500 to-[#d4ff4f]" style={`width:${sk.level}%`}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-8 rounded-2xl border border-[#d4ff4f]/20 bg-[#d4ff4f]/5 p-4 text-sm leading-relaxed text-zinc-300">
+          <span class="text-[#d4ff4f] font-semibold">Edge to agent:</span> this portfolio is 100% Astro — zero client JS framework, ships from the edge. My day job is RAG pipelines, not landing pages.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="relative mx-auto max-w-7xl scroll-mt-24 px-5 py-24 sm:px-8">
+  <div class="reveal flex items-center gap-3 font-mono text-xs tracking-[0.25em] text-[#d4ff4f]">
+    <span class="h-px w-10 bg-[#d4ff4f]/60"></span> 02 · SERVICES
+  </div>
+  <div class="mt-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <h2 class="reveal max-w-xl font-display text-4xl font-bold tracking-tight sm:text-5xl">What I can do <span class="text-zinc-500">for you.</span></h2>
+    <p class="reveal max-w-sm text-zinc-400">Senior-level ownership from first sketch to production deploy — and after.</p>
+  </div>
+
+  <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {services.map((s, i) => (
+      <article class="reveal spotlight tilt group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-[#d4ff4f]/40" style={`--reveal-delay:${i * 70}ms`}>
+        <div class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-[#d4ff4f]/25 to-violet-500/25 font-display text-2xl transition group-hover:scale-110">{s.icon}</div>
+        <h3 class="mt-5 font-display text-lg font-semibold">{s.title}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-zinc-400">{s.text}</p>
+        <ul class="mt-4 space-y-1.5 border-t border-white/10 pt-4">
+          {s.points.map((p) => <li class="text-[13px] text-zinc-300">✓ {p}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>
