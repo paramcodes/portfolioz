@@ -16,17 +16,19 @@ export const site = {
 
 export const socials = [
   { label: 'GitHub', href: 'https://github.com/paramcodes', icon: 'github' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paramveer-singh-2b619a296/', icon: 'linkedin' },
+  { label: 'Twitter / X', href: 'http://x.com/Your_PARAM/', icon: 'x' },
   { label: 'Website', href: 'https://paramveer.me', icon: 'globe' },
   { label: 'Email', href: 'mailto:sparamveer1001@gmail.com', icon: 'mail' },
 ];
 
 export const nav = [
-  { label: 'Work', href: '#work' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Achievements', href: '#achievements' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Work', href: '/#work' },
+  { label: 'About', href: '/#about' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Shelf', href: '/shelf' },
+  { label: 'OSS', href: '/oss' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export const stats = [

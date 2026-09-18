@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { SHELF_ITEMS, SHELF_CATEGORIES, SHELF_INTRO } from '../data/shelf';
+
+const kindEmoji: Record<string, string> = { book: '❝', anime: '✦', movie: '▶', show: '◉' };
+---
+
+<Base title="Shelf — Paramveer Singh" description={SHELF_INTRO}>
+  <Navbar />
+  <main id="top" class="relative overflow-hidden pt-16">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute -top-40 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full opacity-60 blur-3xl" style="background: radial-gradient(closest-side, rgba(139,92,246,.3), transparent), radial-gradient(closest-side, rgba(212,255,79,.12), transparent);"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-5 pb-24 pt-14 sm:px-8">
+      <section>
+        <div class="reveal flex items-center gap-3 font-mono text-xs tracking-[0.25em] text-[#d4ff4f]">
+          <span class="h-px w-10 bg-[#d4ff4f]/60"></span> SHELF
+        </div>
+        <h1 class="reveal mt-4 max-w-3xl font-display text-5xl font-bold tracking-tight sm:text-6xl">Off-duty <span class="bg-gradient-to-r from-violet-400 to-[#d4ff4f] bg-clip-text text-transparent">inputs.</span></h1>
+        <p class="reveal mt-4 max-w-xl text-zinc-400">{SHELF_INTRO} Carry-over from my previous portfolio — the stuff that shapes how I think.</p>
+
+        <div class="reveal mt-8 flex flex-wrap gap-2">
+          <button data-filter="all" class="rounded-full border border-transparent bg-[#d4ff4f] px-4 py-2 text-[13px] font-medium text-black transition hover:border-[#d4ff4f]/50">All</button>
+          {SHELF_CATEGORIES.map((c) => (
+            <button data-filter={c.id} class="rounded-full border border-white/10 px-4 py-2 text-[13px] font-medium text-zinc-400 transition hover:border-[#d4ff4f]/50">{c.label}</button>
+          ))}
+        </div>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {SHELF_ITEMS.map((item, i) => (
+            <article data-category={item.kind} class="reveal spotlight tilt group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] transition hover:-translate-y-1 hover:border-[#d4ff4f]/40" style={`--reveal-delay:${(i % 4) * 60}ms`}>
+              <div class="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-violet-600/20 to-black">
+                <img src={item.image} alt={`${item.title} cover`} loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                <span class="absolute left-3 top-3 rounded-full bg-[#d4ff4f] px-3 py-1 font-mono text-[11px] font-bold tracking-widest text-black">{kindEmoji[item.kind]} {item.kind.toUpperCase()}</span>
+              </div>
+              <div class="p-5">
+                <h2 class="font-display text-[17px] font-bold leading-snug tracking-tight">{item.title}</h2>
+                <div class="mt-1 font-mono text-xs text-zinc-500">{item.creator}</div>
+                <p class="mt-2.5 text-sm leading-relaxed text-zinc-400">{item.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p class="reveal mt-8 text-center text-sm text-zinc-500">Recommendations welcome — <a href="/#contact" class="text-[#d4ff4f] underline-offset-4 hover:underline">tell me what to add →</a></p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>

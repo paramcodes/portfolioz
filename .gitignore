@@ -1,2 +1,49 @@
+# Dependencies
+node_modules/
 
-node_modules
+# Astro build outputs and cache
+dist/
+.astro/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Coverage reports
+coverage/
+.lcov/
+
+# Temporary and cache directories
+.cache/
+.temp/
+.tmp/
+*.tmp
+*.temp
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs_vista.txt

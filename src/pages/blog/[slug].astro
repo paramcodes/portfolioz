@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { BLOG_POSTS, type ContentBlock } from '../../data/blog';
+
+export function getStaticPaths() {
+  return BLOG_POSTS.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const idx = BLOG_POSTS.findIndex((p) => p.slug === slug);
+const post = BLOG_POSTS[idx];
+if (!post) throw new Error(`Unknown post: ${slug}`);
+const prev = BLOG_POSTS[idx - 1];
+const next = BLOG_POSTS[idx + 1];
+
+const toB64 = (s: string) => Buffer.from(s, 'utf-8').toString('base64');
+---
+
+<Base title={`${post.title} — Paramveer Singh`} description={post.blurb}>
+  <Navbar />
+  <main id="top" class="relative overflow-hidden pt-16">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute -top-40 left-1/2 h-[360px] w-[760px] -translate-x-1/2 rounded-full opacity-50 blur-3xl" style="background: radial-gradient(closest-side, rgba(139,92,246,.28), transparent);"></div>
+    </div>
+
+    <article class="relative mx-auto max-w-3xl px-5 pb-16 pt-12 sm:px-8">
+      <a href="/blog" class="font-mono text-xs tracking-widest text-zinc-500 transition hover:text-[#d4ff4f]">← ALL POSTS</a>
+      <h1 class="mt-4 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{post.title}</h1>
+      <p class="mt-4 text-lg leading-relaxed text-zinc-400">{post.blurb}</p>
+      <div class="mt-6 flex flex-wrap items-center gap-3 border-y border-white/10 py-4 font-mono text-xs tracking-widest text-zinc-500">
+        <span>{post.date}</span><span class="text-[#d4ff4f]">·</span><span>{post.readTime.toUpperCase()}</span><span class="text-[#d4ff4f]">·</span>
+        <span class="flex flex-wrap gap-1.5">{post.tags.map((t) => <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-zinc-300">{t}</span>)}</span>
+      </div>
+
+      <div class="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-zinc-300">
+        {post.content.map((block: ContentBlock) => {
+          if (typeof block === 'string') return <p>{block}</p>;
+          if (block.type === 'heading') return <h2 class="pt-4 font-display text-2xl font-bold tracking-tight text-white">{block.text}</h2>;
+          if (block.type === 'subheading') return <h3 class="pt-2 font-display text-xl font-semibold text-white">{block.text}</h3>;
+          if (block.type === 'list') return (
+            <ul class="space-y-2 rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+              {block.items.map((item) => <li class="flex gap-2.5 text-[0.95rem]"><span class="text-[#d4ff4f]">▸</span><span>{item}</span></li>)}
+            </ul>
+          );
+          if (block.type === 'code') return (
+            <pre class="dark-isle overflow-x-auto rounded-2xl border border-white/10 bg-black/60 p-5 font-mono text-[0.82rem] leading-relaxed text-[#d4ff4f]">{block.code}</pre>
+          );
+          if (block.type === 'image') return (
+            <figure class="dark-isle overflow-hidden rounded-2xl border border-white/10">
+              <img src={block.src} alt={block.alt} loading="lazy" class="w-full bg-white/5" />
+              <figcaption class="bg-black/40 px-4 py-2.5 font-mono text-xs text-zinc-500">{block.alt}</figcaption>
+            </figure>
+          );
+          if (block.type === 'mermaid') return (
+            <pre class="mermaid dark-isle overflow-x-auto rounded-2xl border border-white/10 bg-black/60 p-5 text-center font-mono text-xs text-zinc-400" data-code={toB64(block.code)}>Loading diagram…</pre>
+          );
+          return null;
+        })}
+      </div>
+
+      <div class="mt-10 rounded-2xl border border-[#d4ff4f]/25 bg-[#d4ff4f]/5 p-5 text-sm text-zinc-300">
+        Originally published <a href={post.sourceUrl} target="_blank" rel="noopener" class="text-[#d4ff4f] underline-offset-4 hover:underline">here ↗</a> — migrated verbatim from my previous portfolio.
+      </div>
+
+      <nav class="mt-8 grid gap-3 sm:grid-cols-2" aria-label="More posts">
+        {prev
+          ? <a href={`/blog/${prev.slug}`} class="group rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition hover:border-[#d4ff4f]/40"><span class="font-mono text-[11px] tracking-widest text-zinc-500">← NEWER</span><span class="mt-1 block font-display font-semibold transition group-hover:text-[#d4ff4f]">{prev.title}</span></a>
+          : <span />}
+        {next
+          ? <a href={`/blog/${next.slug}`} class="group rounded-2xl border border-white/10 bg-white/[0.02] p-5 text-right transition hover:border-[#d4ff4f]/40"><span class="font-mono text-[11px] tracking-widest text-zinc-500">OLDER →</span><span class="mt-1 block font-display font-semibold transition group-hover:text-[#d4ff4f]">{next.title}</span></a>
+          : <span />}
+      </nav>
+    </article>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  pre.mermaid svg { max-width: 100%; height: auto; margin-inline: auto; }
+</style>

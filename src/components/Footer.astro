@@ -11,7 +11,7 @@ const icons: Record<string, string> = {
 };
 ---
 
-<footer class="border-t border-white/10 bg-black/40">
+<footer class="dark-isle border-t border-white/10 bg-black/40">
   <!-- big CTA banner -->
   <div class="mx-auto max-w-7xl px-5 pt-16 sm:px-8">
     <a href="#contact" class="reveal group block overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-violet-600/30 via-fuchsia-500/10 to-[#d4ff4f]/15 p-8 transition hover:border-[#d4ff4f]/40 sm:p-12">
@@ -43,7 +43,7 @@ const icons: Record<string, string> = {
     <nav aria-label="Sitemap">
       <div class="font-mono text-xs tracking-widest text-zinc-500">SITEMAP</div>
       <ul class="mt-4 space-y-2.5 text-sm">
-        {nav.map((n) => <li><a href={n.href} class="text-zinc-400 transition hover:text-[#d4ff4f]">{n.label}</a></li>)}
+        {[...nav, { label: 'Services', href: '/#services' }, { label: 'Experience', href: '/#experience' }].map((n) => <li><a href={n.href} class="text-zinc-400 transition hover:text-[#d4ff4f]">{n.label}</a></li>)}
       </ul>
     </nav>
     <div>

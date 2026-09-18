@@ -29,7 +29,7 @@ const spanClass: Record<string, string> = {
     {projects.map((p, i) => (
       <article
         data-category={p.category}
-        class={`reveal spotlight tilt group relative flex min-h-[320px] flex-col justify-end overflow-hidden rounded-3xl border border-white/10 transition hover:-translate-y-1 hover:border-white/25 ${spanClass[p.span ?? 'normal']}`}
+        class={`reveal spotlight tilt group relative flex min-h-[320px] flex-col justify-end overflow-hidden rounded-3xl border border-white/10 transition hover:-translate-y-1 hover:border-white/25 dark-isle ${spanClass[p.span ?? 'normal']}`}
         style={`--reveal-delay:${(i % 3) * 80}ms`}
       >
         <div class={`absolute inset-0 bg-gradient-to-br ${p.gradient} opacity-60 transition duration-500 group-hover:scale-105 group-hover:opacity-80`} aria-hidden="true"></div>
