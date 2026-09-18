@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "routePath": "/api/oss",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/oss.js:onRequest"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}

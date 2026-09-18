@@ -1,0 +1,13 @@
+name = "yunhi-oss-premon"
+compatibility_date = "2024-11-01"
+
+# Cron trigger — runs every 6 hours, matching the GitHub Actions schedule.
+[[triggers]]
+crons = ["0 */6 * * *"]
+
+# Shares the same KV namespace as the Pages project so both
+# can read/write the same cached OSS data.
+[[kv_namespaces]]
+binding = "OSS_KV"
+id = "ca52304efab74867b12486ffe9a4b38c"
+preview_id = "ca52304efab74867b12486ffe9a4b38c"

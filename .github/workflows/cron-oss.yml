@@ -1,0 +1,32 @@
+name: Pre-warm OSS data
+# Pings /api/oss every 6 hours so the KV cache stays warm.
+# First visitor after cache expiry always gets cached data (fast);
+# the Worker fetches fresh + caches in the background on cache miss.
+on:
+  schedule:
+    - cron: '0 */6 * * *' # every 6 hours
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: read
+
+jobs:
+  prewarm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hit Pages Function endpoint to warm KV cache
+        run: |
+          set -e
+          URL="${OSS_API_URL:-https://yunhi-portfolio.pages.dev/api/oss}"
+          echo "Pre-warming $URL"
+          STATUS=$(curl -s -o /tmp/oss-response.json -w "%{http_code}" "$URL")
+          echo "HTTP $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "--- response ---"
+            cat /tmp/oss-response.json
+            exit 1
+          fi
+          echo "--- snippet ---"
+          head -c 300 /tmp/oss-response.json
+          echo

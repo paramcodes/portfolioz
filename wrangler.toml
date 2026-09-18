@@ -1,0 +1,31 @@
+# Cloudflare Pages deployment configuration.
+# This wrangler.toml configures the Pages project, which serves the Astro
+# static site AND the /functions/api/oss.js Pages Function.
+
+name = "yunhi-portfolio"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"
+
+# KV namespace for cached OSS data.
+# Create with: wrangler kv namespace create OSS_KV
+# Then paste the IDs below. The Pages Function reads env.OSS_KV.
+[[kv_namespaces]]
+binding = "OSS_KV"
+id = "ca52304efab74867b12486ffe9a4b38c"
+preview_id = "ca52304efab74867b12486ffe9a4b38c"
+
+# ——————————————————————————————————————————————————————
+# CRON PRE-WARM: Cloudflare Pages Functions do NOT support cron
+# triggers natively. You have two options:
+#
+#   Option A (recommended) — GitHub Actions scheduled workflow:
+#     .github/workflows/cron-premon.yml  pings /api/oss hourly.
+#     Simpler, no second deployment.
+#
+#   Option B — separate standalone Worker with a cron trigger:
+#     See /workers/premon.wasm + its own wrangler-worker.toml.
+#     Shares the same OSS_KV namespace.
+#
+# For a portfolio, Option A is plenty. Use the Worker only if you
+# want 100 % Cloudflare-native scheduling.
+# ——————————————————————————————————————————————————————
